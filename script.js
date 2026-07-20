@@ -13,7 +13,9 @@ const startInput = document.getElementById("startTime");
 const startBtn = document.getElementById("startBtn");
 
 const money = document.getElementById("money");
-const bar = document.getElementById("bar");
+const topSand = document.getElementById("topSand");
+const bottomSand = document.getElementById("bottomSand");
+const coins = document.getElementById("coins");
 const percent = document.getElementById("percent");
 
 const startText = document.getElementById("startText");
@@ -44,6 +46,7 @@ function formatCountdown(sec){
 startBtn.onclick = function(){
 
     let value = startInput.value;
+    let coinTimer = null;
 
     if(value=="")
         return;
@@ -62,6 +65,10 @@ startBtn.onclick = function(){
     bonusTimePoint = new Date(startTime.getTime() + 10.5 * 60 * 60 * 1000);
 
     started = true;
+
+    if (coinTimer == null) {
+    coinTimer = setInterval(createCoin, 900);
+    }
 
     startText.innerHTML = formatTime(startTime);
 
@@ -94,7 +101,8 @@ function update(){
 
     let progress = worked / workSeconds * 100;
 
-    bar.style.width = progress + "%";
+    topSand.style.height = (100 - progress) + "%";
+    bottomSand.style.height = progress + "%";
 
     percent.innerHTML = progress.toFixed(1) + "%";
 
@@ -102,6 +110,19 @@ function update(){
 
     leftTime.innerHTML = formatCountdown(remain);
 
+}
+
+function createCoin() {
+
+    const coin = document.createElement("div");
+    coin.className = "coin";
+    coin.innerHTML = "$";
+
+    coins.appendChild(coin);
+
+    setTimeout(() => {
+        coin.remove();
+    }, 2000);
 }
 
 setInterval(update,100);

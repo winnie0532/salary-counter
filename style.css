@@ -40,26 +40,108 @@
         overflow-wrap: anywhere;
     }
 
-    .progress {
-        width: 100%;
-        height: 40px;
-        border: 4px solid black;
-        background: #111;
-        margin-top: 25px;
-        overflow: hidden;
+    .hourglass-area {
+        position: relative;
+        width: 180px;
+        height: 230px;
+        margin: 25px auto 10px;
     }
 
-    .bar {
-        width: 0%;
+    .hourglass {
+        position: relative;
+        width: 120px;
+        height: 190px;
+        margin: 0 auto;
+    }
+
+    .glass {
+        position: absolute;
+        left: 10px;
+        width: 100px;
+        height: 82px;
+        overflow: hidden;
+        border: 5px solid black;
+        background: rgba(255, 255, 255, 0.12);
+    }
+
+    .top-glass {
+        top: 0;
+        clip-path: polygon(0 0, 100% 0, 60% 100%, 40% 100%);
+    }
+
+    .bottom-glass {
+        bottom: 0;
+        clip-path: polygon(40% 0, 60% 0, 100% 100%, 0 100%);
+    }
+
+    .sand {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background: #ffd54f;
+        transition: height 0.2s linear;
+    }
+
+    .top-sand {
         height: 100%;
-        background:
-            repeating-linear-gradient(
-                    90deg,
-                    #f99ba4 0px,
-                    #feb3bb 18px,
-                    #fec1cc 18px,
-                    #f8cdde 22px);
-        transition: width .15s linear;
+    }
+
+    .bottom-sand {
+        height: 0%;
+    }
+
+    .sand-stream {
+        position: absolute;
+        top: 82px;
+        left: 57px;
+        width: 6px;
+        height: 28px;
+        background: #ffd54f;
+        animation: fallingSand 0.4s linear infinite;
+    }
+
+    @keyframes fallingSand {
+        50% {
+            opacity: 0.4;
+        }
+    }
+
+    .coins {
+    position: absolute;
+    right: 0;
+    bottom: 10px;
+    width: 70px;
+    height: 70px;
+    pointer-events: none;
+    }
+
+    .coin {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 30px;
+        height: 30px;
+        border: 4px solid black;
+        border-radius: 50%;
+        background: #ffd54f;
+        color: black;
+        font-size: 12px;
+        line-height: 23px;
+        text-align: center;
+        animation: coinRoll 2s linear forwards;
+    }
+
+    @keyframes coinRoll {
+        0% {
+            transform: translate(0, 0) rotate(0deg);
+            opacity: 1;
+        }
+
+        100% {
+            transform: translate(70px, 45px) rotate(720deg);
+            opacity: 0;
+        }
     }
 
     .percent {
@@ -102,7 +184,7 @@
         font-size: 16px;
     }
 
-    input[type=time] {
+    input[type="time"] {
         display: block;
         width: min(100%, 260px);
         height: 54px;
@@ -121,14 +203,16 @@
 
     button {
         display: block;
-        width: 80%;
+        width: min(100%, 260px);
+        height: 54px;
         margin: 12px auto 0;
+        padding: 0;
+
         font-family: inherit;
         font-size: 14px;
         background: #edb0c4;
         color: black;
         border: 4px solid black;
-        padding: 12px 18px;
         cursor: pointer;
     }
 
@@ -160,6 +244,12 @@
         padding: 12px;
     }
 
+    .hourglass-area {
+        transform: scale(0.85);
+        margin-top: 5px;
+        margin-bottom: -10px;
+    }
+
     .card {
         width: 100%;
         max-width: none;
@@ -184,18 +274,7 @@
         margin-bottom: 14px;
     }
 
-    input[type=time] {
-        display: block;
-        height: 54px;
-        margin: 0 auto;
-        font-size: 16px;
-    }
-
     button {
-        display: block;
-        height: 54px;
-        margin: 12px auto 0;
-        padding: 0;
         font-size: 12px;
     }
 
@@ -207,12 +286,6 @@
         white-space: normal;
         overflow-wrap: anywhere;
         word-break: break-word;
-    }
-
-    .progress {
-        height: 32px;
-        margin-top: 16px;
-        border-width: 3px;
     }
 
     .percent {
