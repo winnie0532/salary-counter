@@ -229,3 +229,85 @@
         }
 
     }
+    
+@media (max-width: 600px) {
+
+    body {
+        align-items: flex-start;
+        padding: 20px 0;
+    }
+
+    .card {
+        width: calc(100% - 24px);
+        max-width: 420px;
+        padding: 28px 20px;
+        margin: 0 auto;
+    }
+
+    h1 {
+        font-size: 28px;
+        line-height: 1.35;
+        margin-bottom: 28px;
+    }
+
+    .setup {
+        margin-bottom: 28px;
+    }
+
+    .setup p {
+        font-size: 16px;
+        margin-bottom: 16px;
+    }
+
+    input[type=time] {
+        width: 100%;
+        max-width: 320px;
+        height: 58px;
+        font-size: 18px;
+    }
+
+    button {
+        display: block;
+        width: 180px;
+        height: 58px;
+        margin: 12px auto 0;
+        padding: 0;
+    }
+
+    .money {
+        font-size: clamp(30px, 10vw, 46px);
+        line-height: 1.25;
+        margin: 30px 0;
+        white-space: nowrap;
+    }
+
+    .progress {
+        height: 36px;
+        margin-top: 18px;
+    }
+
+    .percent {
+        margin-top: 14px;
+        font-size: 16px;
+    }
+
+    .panel {
+        margin-top: 32px;
+        padding: 18px 16px;
+    }
+
+    .row {
+        margin: 16px 0;
+        font-size: 13px;
+        gap: 12px;
+    }
+
+    .label {
+        line-height: 1.35;
+    }
+
+    .value {
+        white-space: nowrap;
+        text-align: right;
+    }
+}
