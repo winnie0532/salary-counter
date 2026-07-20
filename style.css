@@ -207,7 +207,7 @@
     input[type="time"]::-webkit-date-and-time-value {
         text-align: center;
         color: #1d2b53;
-        transform: translateY(3px);
+        transform: translateY(20px);
     }
 
     input[type="time"]::-webkit-calendar-picker-indicator {
