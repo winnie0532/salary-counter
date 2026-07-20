@@ -103,7 +103,9 @@
     }
 
     input[type=time] {
-        height: 60px;
+        display: block;
+        width: 80%;
+        margin: 0 auto;
         background: #1d2b53;
         color: rgb(247, 245, 245);
         border: 4px solid rgba(0, 0, 0, 0.675);
@@ -112,9 +114,15 @@
         font-family: inherit;
     }
 
+    input[type="time"]::-webkit-date-and-time-value {
+        text-align: center;
+        line-height: 46px;
+    }
+
     button {
-        height: 60px;
-        margin-left: 15px;
+        display: block;
+        width: 80%;
+        margin: 12px auto 0;
         font-family: inherit;
         font-size: 14px;
         background: #edb0c4;
