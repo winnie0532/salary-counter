@@ -5,309 +5,243 @@
     }
 
     body {
-
         background: #1d2b53;
         color: #fff1e8;
-
         font-family: 'Press Start 2P', 'Microsoft JhengHei', sans-serif;
-
         display: flex;
         justify-content: center;
         align-items: center;
-
         min-height: 100vh;
     }
 
     .card {
-
         width: min(650px, 95vw);
-
         background: #29366f;
-
         border: 6px solid black;
-
         padding: 35px;
-
         box-shadow: 10px 10px black;
-
     }
 
     h1 {
-
         text-align: center;
-
         color: #ffd54f;
-
         font-size: 30px;
-
         margin-bottom: 35px;
-
         text-shadow: 4px 4px black;
-
     }
 
     .money {
-
         text-align: center;
-
         font-size: 46px;
-
         color: #faf0f3ee;
-
         margin: 40px 0;
-
         text-shadow: 4px 4px black;
-
+        max-width: 100%; 
+        overflow-wrap: anywhere;
     }
 
     .progress {
-
         width: 100%;
-
         height: 40px;
-
         border: 4px solid black;
-
         background: #111;
-
         margin-top: 25px;
-
         overflow: hidden;
-
     }
 
     .bar {
-
         width: 0%;
-
         height: 100%;
-
         background:
-
             repeating-linear-gradient(
                     90deg,
                     #f99ba4 0px,
                     #feb3bb 18px,
                     #fec1cc 18px,
                     #f8cdde 22px);
-
         transition: width .15s linear;
-
     }
 
     .percent {
-
         text-align: center;
-
         margin-top: 18px;
-
         color: #faccd3;
-
         font-size: 18px;
-
     }
 
     .panel {
-
         margin-top: 45px;
-
         border: 4px solid black;
-
         padding: 22px;
-
         background: #1d2b53;
-
     }
 
     .row {
-
         display: flex;
-
         justify-content: space-between;
-
         margin: 18px 0;
-
         font-size: 16px;
-
     }
 
     .label {
-
         color: #29adff;
-
     }
 
     .value {
-
         color: white;
-
     }
 
     .setup {
-
         text-align: center;
-
         margin-bottom: 35px;
-
     }
 
     .setup p {
-
         margin-bottom: 18px;
-
         color: #f2b9c3;
-
         font-size: 16px;
-
     }
 
     input[type=time] {
         height: 60px;
-
         background: #1d2b53;
-
         color: rgb(247, 245, 245);
-
         border: 4px solid rgba(0, 0, 0, 0.675);
-
         padding: 0 12px;
-
         font-size: 18px;
-
         font-family: inherit;
-
     }
 
     button {
         height: 60px;
-
         margin-left: 15px;
-
         font-family: inherit;
-
         font-size: 14px;
-
         background: #edb0c4;
-
         color: black;
-
         border: 4px solid black;
-
         padding: 12px 18px;
-
         cursor: pointer;
-
     }
 
     button:hover {
-
         background: #e6be3b;
-
     }
 
     .footer {
-
         margin-top: 35px;
-
         text-align: center;
-
         color: #ffd54f;
-
         font-size: 12px;
-
     }
 
     .blink {
-
         animation: blink .8s infinite;
     }
 
     @keyframes blink {
-
         50% {
             opacity: .3;
         }
-
     }
 
 @media (max-width: 600px) {
-
     body {
-        align-items: flex-start;
-        padding: 20px 0;
+        display: block;
+        min-height: 100svh;
+        padding: 12px;
     }
 
     .card {
-        width: calc(100% - 24px);
-        max-width: 420px;
-        padding: 28px 20px;
-        margin: 0 auto;
+        width: 100%;
+        max-width: none;
+        border-width: 4px;
+        padding: 24px 14px;
+        box-shadow: 6px 6px black;
     }
 
     h1 {
-        font-size: 28px;
-        line-height: 1.35;
-        margin-bottom: 28px;
+        font-size: clamp(20px, 6vw, 28px);
+        line-height: 1.5;
+        margin-bottom: 24px;
     }
 
     .setup {
-        margin-bottom: 28px;
+        margin-bottom: 24px;
     }
 
     .setup p {
-        font-size: 16px;
-        margin-bottom: 16px;
+        font-size: 12px;
+        line-height: 1.6;
+        margin-bottom: 14px;
     }
 
     input[type=time] {
-        width: 180px;
-        max-width: 320px;
-        height: 58px;
-        font-size: 18px;
+        display: block;
+        width: min(100%, 260px);
+        height: 54px;
+        margin: 0 auto;
+        font-size: 16px;
     }
 
     button {
         display: block;
-        width: 180px;
-        height: 58px;
+        width: min(100%, 260px);
+        height: 54px;
         margin: 12px auto 0;
         padding: 0;
+        font-size: 12px;
     }
 
     .money {
-        font-size: clamp(24px, 8vw, 38px);
-        line-height: 1.25;
-        margin: 30px 0;
-        white-space: nowrap;
+        width: 100%;
+        font-size: clamp(22px, 7vw, 34px);
+        line-height: 1.4;
+        margin: 26px 0;
+        white-space: normal;
+        overflow-wrap: anywhere;
+        word-break: break-word;
     }
 
     .progress {
-        height: 36px;
-        margin-top: 18px;
+        height: 32px;
+        margin-top: 16px;
+        border-width: 3px;
     }
 
     .percent {
-        margin-top: 14px;
-        font-size: 16px;
+        margin-top: 12px;
+        font-size: 13px;
     }
 
     .panel {
-        margin-top: 32px;
-        padding: 18px 16px;
+        margin-top: 28px;
+        padding: 14px 12px;
+        border-width: 3px;
     }
 
     .row {
-        margin: 16px 0;
-        font-size: 13px;
-        gap: 12px;
+        align-items: center;
+        margin: 15px 0;
+        gap: 10px;
+        font-size: 11px;
+        line-height: 1.5;
     }
 
     .label {
-        line-height: 1.35;
+        flex: 1;
+        min-width: 0;
     }
 
     .value {
-        white-space: nowrap;
+        flex-shrink: 0;
         text-align: right;
+        white-space: nowrap;
+    }
+
+    .footer {
+        margin-top: 28px;
+        font-size: 9px;
+        line-height: 1.6;
     }
 }
