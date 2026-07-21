@@ -2,11 +2,18 @@
 const hourlySalary = 272.95;
 const workSeconds = 9 * 60 * 60;
 
+// ===== 加班設定 =====
+const overtimeRate1 = 1.33;
+const overtimeRate2 = 1.87;
+
+const overtimeFirstStageSeconds = 2 * 60 * 60;
+
 // ===== 畫面元件 =====
 let started = false;
 let startTime = null;
 let endTime = null;
 let bonusTimePoint = null;
+let overtimeEligibleTime = null;
 
 // ===== 執行狀態 =====
 const startInput = document.getElementById("startTime");
@@ -21,7 +28,18 @@ const percent = document.getElementById("percent");
 const startText = document.getElementById("startText");
 const endText = document.getElementById("endText");
 const leftTime = document.getElementById("leftTime");
+
+// ===== 加班畫面元件 =====
 const bonusText = document.getElementById("bonusText");
+
+const overtimePanel = document.getElementById("overtimePanel");
+const overtimeStatus = document.getElementById("overtimeStatus");
+const overtimeMoney = document.getElementById("overtimeMoney");
+const overtimeProgressBar = document.getElementById("overtimeProgressBar");
+const overtimeHours = document.getElementById("overtimeHours");
+
+const hourglassArea = document.querySelector(".hourglass-area");
+
 
 // ===== 格式轉換 =====
 function formatTime(date){
@@ -41,6 +59,34 @@ function formatCountdown(sec){
     let s = Math.floor(sec % 60);
 
     return `${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+}
+
+function calculateOvertimePay(overtimeSeconds) {
+
+    if (overtimeSeconds <= 0)
+        return 0;
+
+    const firstStageSeconds = Math.min(
+        overtimeSeconds,
+        overtimeFirstStageSeconds
+    );
+
+    const secondStageSeconds = Math.max(
+        overtimeSeconds - overtimeFirstStageSeconds,
+        0
+    );
+
+    const firstStagePay =
+        firstStageSeconds / 3600 *
+        hourlySalary *
+        overtimeRate1;
+
+    const secondStagePay =
+        secondStageSeconds / 3600 *
+        hourlySalary *
+        overtimeRate2;
+
+    return firstStagePay + secondStagePay;
 }
 
 startBtn.onclick = function(){
@@ -100,8 +146,21 @@ function update(){
         worked = workSeconds;
 
     let salary = worked / 3600 * hourlySalary;
+    
+    if (overtimeSeconds > 0) {
 
-    money.innerHTML = "NT$" + salary.toFixed(2);
+        const overtimePay = calculateOvertimePay(overtimeSeconds);
+
+        overtimeStatus.innerHTML = "ACTIVE";
+        overtimeHours.innerHTML = formatCountdown(overtimeSeconds);
+        overtimeMoney.innerHTML = "NT$" + overtimePay.toFixed(2);
+
+    } else {
+
+        overtimeStatus.innerHTML = "NOT STARTED";
+        overtimeHours.innerHTML = "00:00:00";
+        overtimeMoney.innerHTML = "NT$0.00";
+    }
 
     let progress = worked / workSeconds * 100;
 
@@ -113,6 +172,24 @@ function update(){
     let remain = (endTime - now) / 1000;
 
     leftTime.innerHTML = formatCountdown(remain);
+
+    // ===== 加班計算 =====
+    let overtimeSeconds = (now - overtimeEligibleTime) / 1000;
+
+    if (overtimeSeconds > 0) {
+
+        const overtimePay = calculateOvertimePay(overtimeSeconds);
+
+        overtimeStatus.innerHTML = "ACTIVE";
+        overtimeHours.innerHTML = formatCountdown(overtimeSeconds);
+        overtimeMoney.innerHTML = "NT$" + overtimePay.toFixed(2);
+
+    } else {
+
+        overtimeStatus.innerHTML = "NOT STARTED";
+        overtimeHours.innerHTML = "00:00:00";
+        overtimeMoney.innerHTML = "NT$0.00";
+    }
 }
 
 function createCoin() {
