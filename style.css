@@ -158,6 +158,96 @@
         background: #1d2b53;
     }
 
+        /* ===== 加班區域 ===== */
+    .overtime-panel {
+        position: relative;
+        margin-top: 32px;
+        padding: 24px 22px;
+
+        background: #1d2b53;
+        border: 4px solid black;
+        box-shadow: 6px 6px black;
+
+        overflow: hidden;
+    }
+
+    .overtime-title {
+        text-align: center;
+        color: #fff1e8;
+        font-size: 17px;
+        line-height: 1.6;
+        margin-bottom: 16px;
+        text-shadow: 3px 3px black;
+    }
+
+    .overtime-icon {
+        color: #ffd54f;
+    }
+
+    .overtime-status {
+        text-align: center;
+        color: #f2b9c3;
+        font-size: 13px;
+        margin-bottom: 14px;
+    }
+
+    .overtime-money {
+        text-align: center;
+        color: #ffd54f;
+        font-size: 34px;
+        line-height: 1.4;
+        margin: 16px 0;
+        text-shadow: 4px 4px black;
+    }
+
+    .overtime-rate {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+
+        color: #29adff;
+        font-size: 13px;
+        margin-bottom: 18px;
+    }
+
+    .rate-badge {
+        display: inline-block;
+        min-width: 90px;
+        padding: 10px 12px;
+
+        color: black;
+        background: #ffd54f;
+        border: 3px solid black;
+
+        text-align: center;
+    }
+
+    .overtime-progress {
+        width: 100%;
+        height: 20px;
+        margin: 18px 0 22px;
+
+        background: #29366f;
+        border: 3px solid black;
+        overflow: hidden;
+    }
+
+    .overtime-progress-bar {
+        width: 0%;
+        height: 100%;
+        background: #ffd54f;
+        transition: width 0.3s linear;
+    }
+
+    .overtime-info {
+        margin-top: 12px;
+    }
+
+    .overtime-info .row {
+        margin: 16px 0;
+    }
+
     .row {
         display: flex;
         justify-content: space-between;
@@ -338,5 +428,39 @@
         margin-top: 28px;
         font-size: 9px;
         line-height: 1.6;
+    }
+
+    .overtime-panel {
+        margin-top: 26px;
+        padding: 20px 12px;
+        border-width: 3px;
+        box-shadow: 5px 5px black;
+    }
+
+    .overtime-title {
+        font-size: 13px;
+    }
+
+    .overtime-status {
+        font-size: 10px;
+    }
+
+    .overtime-money {
+        font-size: clamp(23px, 7vw, 32px);
+        overflow-wrap: anywhere;
+    }
+
+    .overtime-rate {
+        font-size: 10px;
+        gap: 10px;
+    }
+
+    .rate-badge {
+        min-width: 75px;
+        padding: 8px;
+    }
+
+    .overtime-info .row {
+        font-size: 10px;
     }
 }
