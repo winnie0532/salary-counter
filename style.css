@@ -156,7 +156,10 @@
         }
 
         100% {
-            transform: translate(20px, -110px) rotate(720deg);
+            transform:
+                translate(var(--coin-x, 20px), -110px)
+                rotate(720deg);
+
             opacity: 0;
         }
     }

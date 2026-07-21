@@ -216,6 +216,10 @@ function createCoin() {
     coin.className = "coin";
     coin.innerHTML = "$";
 
+    const randomX = Math.floor(Math.random() * 161) - 80;
+
+    coin.style.setProperty("--coin-x", randomX + "px");
+
     coins.appendChild(coin);
 
     setTimeout(() => {
