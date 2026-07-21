@@ -14,6 +14,7 @@ let startTime = null;
 let endTime = null;
 let bonusTimePoint = null;
 let overtimeEligibleTime = null;
+let coinTimer = null;
 
 // ===== 執行狀態 =====
 const startInput = document.getElementById("startTime");
@@ -92,7 +93,6 @@ function calculateOvertimePay(overtimeSeconds) {
 startBtn.onclick = function(){
 
     let value = startInput.value;
-    let coinTimer = null;
 
     if(value=="")
         return;
@@ -113,7 +113,7 @@ startBtn.onclick = function(){
     started = true;
 
     if (coinTimer == null) {
-    coinTimer = setInterval(createCoin, 900);
+        startCoinAnimation(900);
     }
 
     startText.innerHTML = formatTime(startTime);
@@ -170,8 +170,16 @@ function update(){
         overtimeHours.innerHTML = formatCountdown(overtimeSeconds);
         overtimeMoney.innerHTML = "NT$" + overtimePay.toFixed(2);
 
+        hourglassArea.classList.add("overtime-active");
+
         // 正常薪資 + 加班費
         money.innerHTML = "NT$" + totalPay.toFixed(2);
+        if (hourglassArea.classList.contains("overtime-active") == false) {
+
+            hourglassArea.classList.add("overtime-active");
+            startCoinAnimation(250);
+
+        }
 
     } else {
 
@@ -181,7 +189,25 @@ function update(){
 
         // 還沒加班，只顯示正常薪資
         money.innerHTML = "NT$" + salary.toFixed(2);
+
+        hourglassArea.classList.remove("overtime-active");
+        if (hourglassArea.classList.contains("overtime-active")) {
+
+            hourglassArea.classList.remove("overtime-active");
+            startCoinAnimation(900);
+
+        }
     }
+}
+
+function startCoinAnimation(interval) {
+
+    if (coinTimer != null) {
+        clearInterval(coinTimer);
+    }
+
+    coinTimer = setInterval(createCoin, interval);
+
 }
 
 function createCoin() {
