@@ -15,6 +15,7 @@ let endTime = null;
 let bonusTimePoint = null;
 let overtimeEligibleTime = null;
 let coinTimer = null;
+let overtimeStartTime = null;
 
 // ===== 執行狀態 =====
 const startInput = document.getElementById("startTime");
@@ -124,6 +125,10 @@ startBtn.onclick = function(){
 
     document.querySelector(".setup").style.display = "none";
 
+    overtimeStartTime = new Date(
+        endTime.getTime() + 0.5 * 60 * 60 * 1000
+    );
+
     overtimeEligibleTime = new Date(
         endTime.getTime() + 1.5 * 60 * 60 * 1000
     );
@@ -159,9 +164,9 @@ function update(){
     leftTime.innerHTML = formatCountdown(remain);
 
     // ===== 加班計算 =====
-    let overtimeSeconds = (now - overtimeEligibleTime) / 1000;
+    let overtimeSeconds = (now - overtimeStartTime) / 1000;
 
-    if (overtimeSeconds > 0) {
+    if (now >= overtimeEligibleTime) {
 
         const overtimePay = calculateOvertimePay(overtimeSeconds);
         const totalPay = salary + overtimePay;
