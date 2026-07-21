@@ -200,29 +200,6 @@
         text-shadow: 4px 4px black;
     }
 
-    .overtime-rate {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 16px;
-
-        color: #29adff;
-        font-size: 13px;
-        margin-bottom: 18px;
-    }
-
-    .rate-badge {
-        display: inline-block;
-        min-width: 90px;
-        padding: 10px 12px;
-
-        color: black;
-        background: #ffd54f;
-        border: 3px solid black;
-
-        text-align: center;
-    }
-
     .overtime-progress {
         width: 100%;
         height: 20px;
@@ -247,7 +224,7 @@
     .overtime-info .row {
         margin: 16px 0;
     }
-
+    
     .row {
         display: flex;
         justify-content: space-between;
@@ -448,16 +425,6 @@
     .overtime-money {
         font-size: clamp(23px, 7vw, 32px);
         overflow-wrap: anywhere;
-    }
-
-    .overtime-rate {
-        font-size: 10px;
-        gap: 10px;
-    }
-
-    .rate-badge {
-        min-width: 75px;
-        padding: 8px;
     }
 
     .overtime-info .row {

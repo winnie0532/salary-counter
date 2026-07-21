@@ -78,6 +78,10 @@ startBtn.onclick = function(){
 
     document.querySelector(".setup").style.display = "none";
 
+    overtimeEligibleTime = new Date(
+        endTime.getTime() + 1.5 * 60 * 60 * 1000
+    );
+
 }
 
 function update(){
@@ -109,7 +113,6 @@ function update(){
     let remain = (endTime - now) / 1000;
 
     leftTime.innerHTML = formatCountdown(remain);
-
 }
 
 function createCoin() {
