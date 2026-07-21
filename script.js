@@ -146,21 +146,6 @@ function update(){
         worked = workSeconds;
 
     let salary = worked / 3600 * hourlySalary;
-    
-    if (overtimeSeconds > 0) {
-
-        const overtimePay = calculateOvertimePay(overtimeSeconds);
-
-        overtimeStatus.innerHTML = "ACTIVE";
-        overtimeHours.innerHTML = formatCountdown(overtimeSeconds);
-        overtimeMoney.innerHTML = "NT$" + overtimePay.toFixed(2);
-
-    } else {
-
-        overtimeStatus.innerHTML = "NOT STARTED";
-        overtimeHours.innerHTML = "00:00:00";
-        overtimeMoney.innerHTML = "NT$0.00";
-    }
 
     let progress = worked / workSeconds * 100;
 
@@ -179,16 +164,23 @@ function update(){
     if (overtimeSeconds > 0) {
 
         const overtimePay = calculateOvertimePay(overtimeSeconds);
+        const totalPay = salary + overtimePay;
 
         overtimeStatus.innerHTML = "ACTIVE";
         overtimeHours.innerHTML = formatCountdown(overtimeSeconds);
         overtimeMoney.innerHTML = "NT$" + overtimePay.toFixed(2);
+
+        // 正常薪資 + 加班費
+        money.innerHTML = "NT$" + totalPay.toFixed(2);
 
     } else {
 
         overtimeStatus.innerHTML = "NOT STARTED";
         overtimeHours.innerHTML = "00:00:00";
         overtimeMoney.innerHTML = "NT$0.00";
+
+        // 還沒加班，只顯示正常薪資
+        money.innerHTML = "NT$" + salary.toFixed(2);
     }
 }
 
