@@ -1,12 +1,15 @@
 // ===== 設定 =====
 const hourlySalary = 272.95;
 const workSeconds = 9 * 60 * 60;
+const lunchBonus = 55;
+const dinnerBonus = 60;
 
 // ===== 加班設定 =====
 const overtimeRate1 = 1.33;
 const overtimeRate2 = 1.87;
 
 const overtimeFirstStageSeconds = 2 * 60 * 60;
+const lunchBox = document.getElementById("lunchBox");
 
 // ===== 畫面元件 =====
 let started = false;
@@ -16,6 +19,7 @@ let bonusTimePoint = null;
 let overtimeEligibleTime = null;
 let coinTimer = null;
 let overtimeStartTime = null;
+let dinnerBonusClaimed = false;
 
 // ===== 執行狀態 =====
 const startInput = document.getElementById("startTime");
@@ -171,6 +175,17 @@ function update(){
 
     let salary = paidSeconds / 3600 * hourlySalary;
 
+    // ===== 13:30 便當 =====
+    const lunchBonusTime = new Date(startTime);
+    lunchBonusTime.setHours(13, 30, 0, 0);
+
+    if (now >= lunchBonusTime) {
+        salary += lunchBonus;
+        lunchBox.classList.add("show");
+    } else {
+        lunchBox.classList.remove("show");
+    }
+
     let progress = worked / workSeconds * 100;
 
     topSand.style.height = (100 - progress) + "%";
@@ -188,7 +203,18 @@ function update(){
     if (now >= overtimeEligibleTime) {
 
         const overtimePay = calculateOvertimePay(overtimeSeconds);
-        const totalPay = salary + overtimePay;
+
+        // ===== 加班滿兩小時，增加晚餐補助 =====
+        const hasDinnerBonus = overtimeSeconds >= 2 * 60 * 60;
+        const dinnerBonusPay = hasDinnerBonus ? dinnerBonus : 0;
+        const totalPay = salary + overtimePay + dinnerBonusPay;
+
+        if (hasDinnerBonus && !dinnerBonusClaimed) {
+            dinnerBonusClaimed = true;
+            lunchBox.classList.remove("show");
+            void lunchBox.offsetWidth;
+            lunchBox.classList.add("show");
+        }
 
         overtimeStatus.innerHTML = "ACTIVE";
         overtimeHours.innerHTML = formatCountdown(overtimeSeconds);
