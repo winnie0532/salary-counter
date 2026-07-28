@@ -149,8 +149,27 @@ function update(){
 
     if(worked > workSeconds)
         worked = workSeconds;
+    
+    // ===== 扣除 12:00～13:00 午休 =====
+    const salaryTime = new Date(Math.min(now.getTime(), endTime.getTime()));
 
-    let salary = worked / 3600 * hourlySalary;
+    const lunchStart = new Date(startTime);
+    lunchStart.setHours(12, 0, 0, 0);
+
+    const lunchEnd = new Date(startTime);
+    lunchEnd.setHours(13, 0, 0, 0);
+
+    const lunchSeconds = Math.max(
+        0,
+        (
+            Math.min(salaryTime.getTime(), lunchEnd.getTime()) -
+            Math.max(startTime.getTime(), lunchStart.getTime())
+        ) / 1000
+    );
+
+    const paidSeconds = Math.max(0, worked - lunchSeconds);
+
+    let salary = paidSeconds / 3600 * hourlySalary;
 
     let progress = worked / workSeconds * 100;
 
