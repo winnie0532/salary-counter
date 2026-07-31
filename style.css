@@ -15,6 +15,8 @@
     }
 
     .card {
+        position: relative;
+
         width: min(650px, 95vw);
         background: #29366f;
         border: 6px solid black;
@@ -388,6 +390,65 @@
 
     button:hover {
         background: #e6be3b;
+    }
+
+    /* ===== 工作事件按鈕 ===== */
+    .event-control {
+        position: absolute;
+
+        left: -140px;
+        top: -10px;
+
+        width: max-content;
+        z-index: 20;
+    }
+
+    .event-control[hidden] {
+        display: none;
+    }
+
+    .event-menu {
+        position: absolute;
+
+        left: 0;
+        top: 68px;
+
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        width: max-content;
+    }
+
+    .event-menu[hidden] {
+        display: none;
+    }
+
+    .event-menu-btn {
+        width: 86px;
+        height: 38px;
+
+        margin: 0;
+        padding-left: 10px;
+
+        font-size: 10px;
+
+        background: #edb0c4;
+
+        box-shadow: 3px 3px black;
+    }
+
+    .event-btn {
+        width: auto;
+        height: 36px;
+        margin: 0;
+
+        padding: 0 10px;
+
+        font-size: 8px;
+        background: #edb0c4;
+
+        box-shadow: 3px 3px black;
     }
 
     .footer {
@@ -774,4 +835,9 @@
     .settled-pay-total {
         font-size: 10px;
     }
+
+    .event-control {
+    left: 14px;
+    top: 105px;
+    }   
 }

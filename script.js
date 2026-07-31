@@ -55,6 +55,10 @@ const settledTotalPay = document.getElementById("settledTotalPay");
 
 const hourglassArea = document.querySelector(".hourglass-area");
 
+// ===== Event Menu =====
+const eventMenuBtn = document.getElementById("eventMenuBtn");
+const eventMenu = document.getElementById("eventMenu");
+const eventControl = document.getElementById("eventControl");
 
 // ===== 格式轉換 =====
 function formatTime(date){
@@ -137,6 +141,7 @@ startBtn.onclick = function(){
     bonusText.innerHTML = formatTime(bonusTimePoint);
 
     document.querySelector(".setup").style.display = "none";
+    eventControl.hidden = false;
 
     overtimeStartTime = new Date(
         endTime.getTime() + 0.5 * 60 * 60 * 1000
@@ -147,6 +152,12 @@ startBtn.onclick = function(){
     );
 
 }
+
+eventMenuBtn.onclick = function () {
+
+    eventMenu.hidden = !eventMenu.hidden;
+
+};
 
 function update(){
 
