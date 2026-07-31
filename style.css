@@ -397,7 +397,7 @@
         position: absolute;
 
         left: -140px;
-        top: -10px;
+        top: -5px;
 
         width: max-content;
         z-index: 20;
@@ -837,7 +837,7 @@
     }
 
     .event-control {
-    left: 14px;
-    top: 105px;
+        left: -125px;
+        top: 105px;
     }   
 }
