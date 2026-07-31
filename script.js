@@ -200,13 +200,8 @@ startBtn.onclick = function(){
     document.querySelector(".setup").style.display = "none";
     eventControl.hidden = false;
 
-    overtimeStartTime = new Date(
-        endTime.getTime() + 0.5 * 60 * 60 * 1000
-    );
-
-    overtimeEligibleTime = new Date(
-        endTime.getTime() + 1.5 * 60 * 60 * 1000
-    );
+    overtimeStartTime = new Date(endTime.getTime() + 0.5 * 60 * 60 * 1000);
+    overtimeEligibleTime = new Date(endTime.getTime() + 1.5 * 60 * 60 * 1000);
 
 }
 
@@ -435,23 +430,12 @@ endOvertimeBtn.onclick = function () {
     const mealAllowance =
         officialLunchBonus + officialDinnerBonus;
 
-    const officialTotalPay =
-        baseSalary +
-        mealAllowance +
-        officialOvertimePay;
+    const officialTotalPay = baseSalary + mealAllowance + officialOvertimePay;
 
-    settledBaseSalary.innerHTML =
-        "NT$" + baseSalary.toFixed(2);
-
-    settledMealAllowance.innerHTML =
-        "NT$" + mealAllowance.toFixed(2);
-
-    settledOvertimePay.innerHTML =
-        "NT$" + officialOvertimePay.toFixed(2);
-
-    settledTotalPay.innerHTML =
-        "NT$" + officialTotalPay.toFixed(2);
-
+    settledBaseSalary.innerHTML = "NT$" + baseSalary.toFixed(2);
+    settledMealAllowance.innerHTML ="NT$" + mealAllowance.toFixed(2);
+    settledOvertimePay.innerHTML = "NT$" + officialOvertimePay.toFixed(2);
+    settledTotalPay.innerHTML = "NT$" + officialTotalPay.toFixed(2);
     settledPayPanel.hidden = false;
 
 };
