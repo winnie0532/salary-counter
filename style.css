@@ -536,6 +536,114 @@
             opacity: 1;
         }
     }
+
+    /* ===== Dinner Burger ===== */
+
+    .dinner-burger {
+        display: none;
+        position: absolute;
+
+        left: 200px;
+        top: 40px;
+
+        width: 44px;
+        height: 34px;
+
+        z-index: 5;
+    }
+
+    /* 出現時跳一下 */
+    .dinner-burger.show {
+        display: block;
+        animation: burgerJump 0.7s steps(5, end);
+    }
+
+    /* 上層麵包：上窄下寬 */
+    .burger-top {
+        width: 34px;
+        height: 10px;
+        margin: 0 auto;
+
+        background: #ffd54f;
+        border: 3px solid #000;
+        border-bottom: none;
+
+        clip-path: polygon(
+            18% 0,
+            82% 0,
+            100% 40%,
+            100% 100%,
+            0 100%,
+            0 40%
+        );
+    }
+
+    /* 生菜故意向左右凸出 */
+    .burger-lettuce {
+        width: 42px;
+        height: 5px;
+        margin: 0 auto;
+
+        background: #5ac54f;
+        border: 3px solid #000;
+    }
+
+    /* 肉排 */
+    .burger-meat {
+        width: 38px;
+        height: 7px;
+        margin: -3px auto 0;
+
+        background: #8b4513;
+        border: 3px solid #000;
+    }
+
+    /* 下層麵包 */
+    .burger-bottom {
+        width: 34px;
+        height: 8px;
+        margin: -3px auto 0;
+
+        background: #ffd54f;
+        border: 3px solid #000;
+
+        clip-path: polygon(
+            0 0,
+            100% 0,
+            100% 60%,
+            82% 100%,
+            18% 100%,
+            0 60%
+        );
+    }
+
+    /* 漢堡跳出動畫 */
+    @keyframes burgerJump {
+        0% {
+            opacity: 0;
+            transform: translateY(18px) scale(0.7);
+        }
+
+        35% {
+            opacity: 1;
+            transform: translateY(-12px) scale(1);
+        }
+
+        60% {
+            transform: translateY(4px);
+        }
+
+        80% {
+            transform: translateY(-3px);
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+
 @media (max-width: 600px) {
     body {
         display: block;

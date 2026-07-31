@@ -10,6 +10,7 @@ const overtimeRate2 = 1.67;
 
 const overtimeFirstStageSeconds = 2 * 60 * 60;
 const lunchBox = document.getElementById("lunchBox");
+const dinnerBurger = document.getElementById("dinnerBurger");
 
 // ===== 畫面元件 =====
 let started = false;
@@ -230,9 +231,10 @@ function update(){
 
         if (hasDinnerBonus && !dinnerBonusClaimed) {
             dinnerBonusClaimed = true;
-            lunchBox.classList.remove("show");
-            void lunchBox.offsetWidth;
-            lunchBox.classList.add("show");
+
+            dinnerBurger.classList.remove("show");
+            void dinnerBurger.offsetWidth;
+            dinnerBurger.classList.add("show");
         }
 
         overtimeStatus.innerHTML = "ACTIVE";
@@ -245,7 +247,7 @@ function update(){
         if (!overtimeEnded) {
             money.innerHTML = "NT$" + totalPay.toFixed(2);
         }
-        
+
         if (hourglassArea.classList.contains("overtime-active") == false) {
 
             hourglassArea.classList.add("overtime-active");
