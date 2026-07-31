@@ -272,6 +272,63 @@
         margin: 16px 0;
     }
     
+    /* ===== 加班結算區 ===== */
+    .settled-pay-panel {
+        margin-top: 22px;
+        padding: 18px 16px;
+
+        background: #29366f;
+        border: 4px solid black;
+        box-shadow: 5px 5px black;
+    }
+
+    .settled-pay-title {
+        text-align: center;
+        color: #ffd54f;
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 18px;
+        text-shadow: 3px 3px black;
+    }
+
+    .settled-pay-row,
+    .settled-pay-total {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        gap: 12px;
+        margin: 14px 0;
+
+        font-size: 11px;
+        line-height: 1.6;
+    }
+
+    .settled-pay-row span:first-child {
+        color: #29adff;
+    }
+
+    .settled-pay-row span:last-child {
+        color: #fff1e8;
+        text-align: right;
+        white-space: nowrap;
+    }
+
+    .settled-pay-total {
+        margin-top: 18px;
+        padding-top: 16px;
+        border-top: 4px dashed black;
+
+        color: #ffd54f;
+        font-size: 13px;
+        text-shadow: 2px 2px black;
+    }
+
+    .settled-pay-total span:last-child {
+        text-align: right;
+        white-space: nowrap;
+    }
+
     .row {
         display: flex;
         justify-content: space-between;
@@ -373,8 +430,8 @@
 
         position: absolute;
 
-        left: 138px;
-        top: 80px;
+        left: 200px;
+        top: 2px;
 
         width: 32px;
         height: 32px;
@@ -604,6 +661,26 @@
     }
 
     .overtime-info .row {
+        font-size: 10px;
+    }
+
+    .settled-pay-panel {
+        padding: 16px 10px;
+        border-width: 3px;
+        box-shadow: 4px 4px black;
+    }
+
+    .settled-pay-title {
+        font-size: 12px;
+    }
+
+    .settled-pay-row,
+    .settled-pay-total {
+        gap: 8px;
+        font-size: 9px;
+    }
+
+    .settled-pay-total {
         font-size: 10px;
     }
 }

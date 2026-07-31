@@ -6,7 +6,7 @@ const dinnerBonus = 60;
 
 // ===== 加班設定 =====
 const overtimeRate1 = 1.33;
-const overtimeRate2 = 1.87;
+const overtimeRate2 = 1.67;
 
 const overtimeFirstStageSeconds = 2 * 60 * 60;
 const lunchBox = document.getElementById("lunchBox");
@@ -21,9 +21,12 @@ let coinTimer = null;
 let overtimeStartTime = null;
 let dinnerBonusClaimed = false;
 
+let overtimeEnded = false;
+let overtimeEndTime = null;
 // ===== 執行狀態 =====
 const startInput = document.getElementById("startTime");
 const startBtn = document.getElementById("startBtn");
+const endOvertimeBtn = document.getElementById("endOvertimeBtn");
 
 const money = document.getElementById("money");
 const topSand = document.getElementById("topSand");
@@ -43,6 +46,12 @@ const overtimeStatus = document.getElementById("overtimeStatus");
 const overtimeMoney = document.getElementById("overtimeMoney");
 const overtimeProgressBar = document.getElementById("overtimeProgressBar");
 const overtimeHours = document.getElementById("overtimeHours");
+
+const settledPayPanel = document.getElementById("settledPayPanel");
+const settledBaseSalary = document.getElementById("settledBaseSalary");
+const settledMealAllowance = document.getElementById("settledMealAllowance");
+const settledOvertimePay = document.getElementById("settledOvertimePay");
+const settledTotalPay = document.getElementById("settledTotalPay");
 
 const hourglassArea = document.querySelector(".hourglass-area");
 
@@ -145,6 +154,9 @@ function update(){
         return;
 
     let now = new Date();
+    
+    // 加班結束後，加班時間固定
+    const overtimeNow = overtimeEnded? overtimeEndTime: now;
 
     let worked = (now - startTime) / 1000;
 
@@ -198,11 +210,19 @@ function update(){
     leftTime.innerHTML = formatCountdown(remain);
 
     // ===== 加班計算 =====
-    let overtimeSeconds = (now - overtimeStartTime) / 1000;
+    let overtimeSeconds = (overtimeNow - overtimeStartTime) / 1000;
 
-    if (now >= overtimeEligibleTime) {
+    if (overtimeNow >= overtimeEligibleTime) {
 
-        const overtimePay = calculateOvertimePay(overtimeSeconds);
+        // 加班以半小時為單位結算
+        const settledOvertimeSeconds =
+            Math.floor(overtimeSeconds / (30 * 60)) * (30 * 60);
+
+        const overtimePay = calculateOvertimePay(
+            overtimeEnded
+                ? settledOvertimeSeconds
+                : overtimeSeconds
+        );
 
         // ===== 加班滿兩小時，增加晚餐補助 =====
         const hasDinnerBonus = overtimeSeconds >= 2 * 60 * 60;
@@ -276,5 +296,69 @@ function createCoin() {
         coin.remove();
     }, 2000);
 }
+endOvertimeBtn.onclick = function () {
+
+    if (overtimeEnded)
+        return;
+
+    overtimeEnded = true;
+    overtimeEndTime = new Date();
+
+    const overtimeSeconds =
+        (overtimeEndTime - overtimeStartTime) / 1000;
+
+    // 正式加班費以半小時為單位，未滿半小時不計
+    const settledOvertimeSeconds =
+        Math.floor(
+            Math.max(0, overtimeSeconds) / (30 * 60)
+        ) * (30 * 60);
+
+    const officialOvertimePay =
+        overtimeEndTime >= overtimeEligibleTime
+            ? calculateOvertimePay(settledOvertimeSeconds)
+            : 0;
+
+    // 正常一天：工作 9 小時，扣 1 小時午休
+    const baseSalary =
+        hourlySalary * 8;
+
+    // 13:30 後有午餐補助
+    const lunchBonusTime = new Date(startTime);
+    lunchBonusTime.setHours(13, 30, 0, 0);
+
+    const officialLunchBonus =
+        overtimeEndTime >= lunchBonusTime
+            ? lunchBonus
+            : 0;
+
+    // 加班滿兩小時有晚餐補助
+    const officialDinnerBonus =
+        overtimeSeconds >= 2 * 60 * 60
+            ? dinnerBonus
+            : 0;
+
+    const mealAllowance =
+        officialLunchBonus + officialDinnerBonus;
+
+    const officialTotalPay =
+        baseSalary +
+        mealAllowance +
+        officialOvertimePay;
+
+    settledBaseSalary.innerHTML =
+        "NT$" + baseSalary.toFixed(2);
+
+    settledMealAllowance.innerHTML =
+        "NT$" + mealAllowance.toFixed(2);
+
+    settledOvertimePay.innerHTML =
+        "NT$" + officialOvertimePay.toFixed(2);
+
+    settledTotalPay.innerHTML =
+        "NT$" + officialTotalPay.toFixed(2);
+
+    settledPayPanel.hidden = false;
+
+};
 
 setInterval(update,100);
