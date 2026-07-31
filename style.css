@@ -247,23 +247,6 @@
         text-shadow: 4px 4px black;
     }
 
-    .overtime-progress {
-        width: 100%;
-        height: 20px;
-        margin: 18px 0 22px;
-
-        background: #29366f;
-        border: 3px solid black;
-        overflow: hidden;
-    }
-
-    .overtime-progress-bar {
-        width: 0%;
-        height: 100%;
-        background: #ffd54f;
-        transition: width 0.3s linear;
-    }
-
     .overtime-info {
         margin-top: 12px;
     }

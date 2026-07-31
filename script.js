@@ -44,7 +44,6 @@ const bonusText = document.getElementById("bonusText");
 const overtimePanel = document.getElementById("overtimePanel");
 const overtimeStatus = document.getElementById("overtimeStatus");
 const overtimeMoney = document.getElementById("overtimeMoney");
-const overtimeProgressBar = document.getElementById("overtimeProgressBar");
 const overtimeHours = document.getElementById("overtimeHours");
 
 const settledPayPanel = document.getElementById("settledPayPanel");
@@ -243,7 +242,10 @@ function update(){
         hourglassArea.classList.add("overtime-active");
 
         // 正常薪資 + 加班費
-        money.innerHTML = "NT$" + totalPay.toFixed(2);
+        if (!overtimeEnded) {
+            money.innerHTML = "NT$" + totalPay.toFixed(2);
+        }
+        
         if (hourglassArea.classList.contains("overtime-active") == false) {
 
             hourglassArea.classList.add("overtime-active");
