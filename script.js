@@ -77,7 +77,7 @@ function addEvent(eventType) {
 
     } else if (eventType === "toilet") {
 
-        eventItem.textContent = "🚽";
+        eventItem.textContent = "💩";
 
     } else if (eventType === "lunch") {
 
