@@ -469,24 +469,13 @@
     }
 
     /* ===== 32 × 32 像素便當 ===== */
-    .lunch-box {
-        display: none;
-
-        position: absolute;
-
-        left: 200px;
-        top: 2px;
+    .event-lunch-box {
+        position: relative;
 
         width: 32px;
         height: 32px;
 
         animation: lunchPop .8s steps(4) forwards;
-
-        z-index: 5;
-    }
-
-    .lunch-box.show {
-        display: block;
     }
 
     .bento-inner {
@@ -599,23 +588,12 @@
     }
 
     /* ===== Dinner Burger ===== */
-
-    .dinner-burger {
-        display: none;
-        position: absolute;
-
-        left: 200px;
-        top: 40px;
+    .event-dinner-burger {
+        position: relative;
 
         width: 44px;
         height: 34px;
 
-        z-index: 5;
-    }
-
-    /* 出現時跳一下 */
-    .dinner-burger.show {
-        display: block;
         animation: burgerJump 0.7s steps(5, end);
     }
 
@@ -702,6 +680,34 @@
             opacity: 1;
             transform: translateY(0);
         }
+    }
+
+    /* ===== Event Timeline ===== */
+
+   .event-list {
+        position: absolute;
+
+        left: 205px;
+        top: 0;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        gap: 6px;
+
+        width: 48px;
+    }
+
+    .event-item {
+        width: 48px;
+        min-height: 36px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        font-size: 22px;
     }
 
 

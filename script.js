@@ -9,8 +9,6 @@ const overtimeRate1 = 1.33;
 const overtimeRate2 = 1.67;
 
 const overtimeFirstStageSeconds = 2 * 60 * 60;
-const lunchBox = document.getElementById("lunchBox");
-const dinnerBurger = document.getElementById("dinnerBurger");
 
 // ===== 畫面元件 =====
 let started = false;
@@ -24,6 +22,9 @@ let dinnerBonusClaimed = false;
 
 let overtimeEnded = false;
 let overtimeEndTime = null;
+
+let lunchEventAdded = false;
+let dinnerEventAdded = false;
 // ===== 執行狀態 =====
 const startInput = document.getElementById("startTime");
 const startBtn = document.getElementById("startBtn");
@@ -59,6 +60,62 @@ const hourglassArea = document.querySelector(".hourglass-area");
 const eventMenuBtn = document.getElementById("eventMenuBtn");
 const eventMenu = document.getElementById("eventMenu");
 const eventControl = document.getElementById("eventControl");
+const eventList = document.getElementById("eventList");
+
+function addEvent(eventType) {
+
+    const eventItem = document.createElement("div");
+    eventItem.className = "event-item";
+
+    if (eventType === "happy") {
+
+        eventItem.textContent = "😊";
+
+    } else if (eventType === "bad") {
+
+        eventItem.textContent = "😭";
+
+    } else if (eventType === "toilet") {
+
+        eventItem.textContent = "🚽";
+
+    } else if (eventType === "lunch") {
+
+        eventItem.innerHTML = `
+            <div class="event-lunch-box">
+                <div class="bento-inner">
+
+                    <div class="bento-rice">
+                        <span class="plum"></span>
+                    </div>
+
+                    <div class="bento-egg"></div>
+                    <div class="bento-meat"></div>
+                    <div class="bento-veg"></div>
+
+                </div>
+            </div>
+        `;
+
+    } else if (eventType === "dinner") {
+
+        eventItem.innerHTML = `
+            <div class="event-dinner-burger">
+                <div class="burger-top"></div>
+                <div class="burger-lettuce"></div>
+                <div class="burger-meat"></div>
+                <div class="burger-bottom"></div>
+            </div>
+        `;
+
+    } else {
+
+        return;
+
+    }
+
+    eventList.appendChild(eventItem);
+}
 
 // ===== 格式轉換 =====
 function formatTime(date){
@@ -159,6 +216,22 @@ eventMenuBtn.onclick = function () {
 
 };
 
+const eventButtons = document.querySelectorAll(".event-btn");
+
+eventButtons.forEach(function (button) {
+
+    button.onclick = function () {
+
+        const eventType = button.dataset.event;
+
+        addEvent(eventType);
+
+        eventMenu.hidden = true;
+
+    };
+
+});
+
 function update(){
 
     if(!started)
@@ -203,10 +276,14 @@ function update(){
     lunchBonusTime.setHours(13, 30, 0, 0);
 
     if (now >= lunchBonusTime) {
+
         salary += lunchBonus;
-        lunchBox.classList.add("show");
-    } else {
-        lunchBox.classList.remove("show");
+
+        if (!lunchEventAdded) {
+            addEvent("lunch");
+            lunchEventAdded = true;
+        }
+
     }
 
     let progress = worked / workSeconds * 100;
@@ -241,11 +318,14 @@ function update(){
         const totalPay = salary + overtimePay + dinnerBonusPay;
 
         if (hasDinnerBonus && !dinnerBonusClaimed) {
+
             dinnerBonusClaimed = true;
 
-            dinnerBurger.classList.remove("show");
-            void dinnerBurger.offsetWidth;
-            dinnerBurger.classList.add("show");
+            if (!dinnerEventAdded) {
+                addEvent("dinner");
+                dinnerEventAdded = true;
+            }
+
         }
 
         overtimeStatus.innerHTML = "ACTIVE";
