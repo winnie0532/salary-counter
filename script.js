@@ -1,5 +1,5 @@
 // ===== 設定 =====
-const hourlySalary = 272.95;
+const hourlySalary = 275;
 const workSeconds = 9 * 60 * 60;
 const lunchBonus = 55;
 const dinnerBonus = 60;
