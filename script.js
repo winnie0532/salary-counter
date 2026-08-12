@@ -1,6 +1,7 @@
 // ===== 設定 =====
 const hourlySalary = 275;
 const workSeconds = 9 * 60 * 60;
+const paidWorkSeconds = 8 * 60 * 60;
 const lunchBonus = 55;
 const dinnerBonus = 60;
 
@@ -288,9 +289,11 @@ function update(){
         ) / 1000
     );
 
-    const paidSeconds = Math.max(0, worked - lunchSeconds);
+    const paidSeconds = Math.min(Math.max(0, worked - lunchSeconds),paidWorkSeconds);
 
-    let salary = paidSeconds / 3600 * hourlySalary;
+    const baseSalary = paidSeconds / 3600 * hourlySalary;
+    let regularPay = baseSalary;
+
 
     // ===== 13:30 便當 =====
     const lunchBonusTime = new Date(startTime);
@@ -298,7 +301,7 @@ function update(){
 
     if (now >= lunchBonusTime) {
 
-        salary += lunchBonus;
+        regularPay += lunchBonus;
 
         if (!lunchEventAdded) {
             addEvent("lunch");
@@ -336,7 +339,7 @@ function update(){
         // ===== 加班滿兩小時，增加晚餐補助 =====
         const hasDinnerBonus = overtimeSeconds >= 2 * 60 * 60;
         const dinnerBonusPay = hasDinnerBonus ? dinnerBonus : 0;
-        const totalPay = salary + overtimePay + dinnerBonusPay;
+        const totalPay = regularPay + overtimePay + dinnerBonusPay;
 
         if (hasDinnerBonus && !dinnerBonusClaimed) {
 
@@ -374,7 +377,7 @@ function update(){
         overtimeMoney.innerHTML = "NT$0.00";
 
         // 還沒加班，只顯示正常薪資
-        money.innerHTML = "NT$" + salary.toFixed(2);
+        money.innerHTML = "NT$" + regularPay.toFixed(2);
 
         hourglassArea.classList.remove("overtime-active");
         if (hourglassArea.classList.contains("overtime-active")) {
