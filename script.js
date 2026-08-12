@@ -69,15 +69,41 @@ function addEvent(eventType) {
 
     if (eventType === "happy") {
 
-        eventItem.textContent = "😊";
+        eventItem.innerHTML = `
+            <div class="pixel-face">
+                <div class="pixel-face-inner">
+                    <span class="happy-eye left"></span>
+                    <span class="happy-eye right"></span>
+                    <span class="happy-mouth"></span>
+                    <span class="happy-cheek left"></span>
+                    <span class="happy-cheek right"></span>
+                </div>
+            </div>
+        `;
 
     } else if (eventType === "bad") {
 
-        eventItem.textContent = "😭";
+        eventItem.innerHTML = `
+            <div class="pixel-face">
+                <div class="pixel-face-inner">
+                    <span class="bad-eye left"></span>
+                    <span class="bad-eye right"></span>
+                    <span class="bad-tear left"></span>
+                    <span class="bad-tear right"></span>
+                    <span class="bad-mouth"></span>
+                </div>
+            </div>
+        `;
 
     } else if (eventType === "toilet") {
 
-        eventItem.textContent = "💩";
+        eventItem.innerHTML = `
+            <div class="pixel-poop">
+                <span class="poop-top"></span>
+                <span class="poop-middle"></span>
+                <span class="poop-bottom"></span>
+            </div>
+        `;
 
     } else if (eventType === "lunch") {
 
